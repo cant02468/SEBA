@@ -1,0 +1,69 @@
+CREATE TABLE BOOKEE(
+    BookeeID Int(9) NOT NULL,
+    BookeeLastName CHAR(20) NOT NULL,
+    BookeeFirstName CHAR(20) NOT NULL,
+    PRIMARY KEY (BookeeID)
+);
+
+INSERT INTO BOOKEE VALUES(
+    '000000001', 'Vu', 'Danton'
+);
+INSERT INTO BOOKEE VALUES(
+    '000000002', 'Vu', 'Not Danton'
+);
+
+CREATE TABLE RESERVATION(
+    ReservationID Int(6) NOT NULL,
+    RoomID Int(5) NOT NULL,
+    BookeeID Int(9) NOT NULL,
+    AdminID Int(9) NOT NULL,
+    Organization TINYTEXT NOT NULL,
+    AdditionalRequest MEDIUMTEXT NOT NULL,
+    Price DECIMAL(5,2) NOT NULL,
+    PRIMARY KEY (ReservationID),
+    FOREIGN KEY (RoomID) REFERENCES ROOM (RoomID),
+    FOREIGN KEY (BookeeID) REFERENCES BOOKEE (BookeeID),
+    FOREIGN KEY (AdminID) REFERENCES ADMIN (AdminID)
+);
+
+INSERT INTO RESERVATION VALUES(
+    '000001', '01001', '000000001', '1000000001'
+);
+INSERT INTO RESERVATION VALUES(
+    '000002', '01001', '000000002', '1000000001'
+);
+INSERT INTO RESERVATION VALUES(
+    '000003', '11575', '000000001', '1000000002'
+);
+
+
+CREATE TABLE ROOM(
+    RoomId Int(5) NOT NULL,
+    Equipment MEDIUMTEXT NOT NULL,
+    PRIMARY KEY (RoomId)
+);
+
+INSERT INTO ROOM VALUES(
+    '01001', '18 Chairs, 1 Projector'
+);
+INSERT INTO ROOM VALUES(
+    '01002', '18 Chairs, 1 Projector, 1 Chalkboard'
+);
+INSERT INTO ROOM VALUES(
+    '11575', '24 Chairs, 16 Desktops, 1 Projector, 1 Printer'
+);
+
+
+CREATE TABLE ADMIN(
+    AdminID Int(9) NOT NULL,
+    AdminLastName CHAR(20) NOT NULL,
+    AdminFirstName CHAR(20) NOT NULL,
+    PRIMARY KEY (BookeeID)
+);
+
+INSERT INTO ADMIN VALUES(
+    '100000001', 'Admin', 'Totally not'
+);
+INSERT INTO ADMIN VALUES(
+    '100000002', 'Admin', 'Also not'
+);
